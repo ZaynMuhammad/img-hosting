@@ -1,12 +1,15 @@
 import type { Request, Response, NextFunction } from "express";
 import express from "express";
 import cors from "cors";
+import AWS from 'aws-sdk';
 
 import path from "path";
 import { fileURLToPath } from "url";
+import { uploadImg } from "./controller/uploadImg";
 
 const app = express();
 const port = process.env.PORT || 8080;
+
 
 type Error = {
     status: number;
@@ -15,6 +18,14 @@ type Error = {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Configure AWS 
+
+AWS.config.update({
+  accessKeyId: 'Put in key here from .env',
+  secretAccessKey: 'Put in key here from .env',
+  region: 'Put in key here from .env'
+})
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -27,10 +38,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 // const indexRouter = require('./routes/index');
-app.use('/', (req, res) => {
+app.get('/images', (req, res) => {
   console.log('GET /');
   res.json({ message: 'Hello from server!' });
 });
+
+app.post('/upload', uploadImg)
 
 // Error handling middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
