@@ -2,11 +2,13 @@ import type { Request, Response, NextFunction } from "express";
 import express from "express";
 import cors from "cors";
 import AWS from 'aws-sdk';
+import dotenv from 'dotenv'
 
 import path from "path";
 import { fileURLToPath } from "url";
 import { uploadImg } from "./controller/uploadImg";
 
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -22,9 +24,9 @@ const __dirname = path.dirname(__filename);
 // Configure AWS 
 
 AWS.config.update({
-  accessKeyId: 'Put in key here from .env',
-  secretAccessKey: 'Put in key here from .env',
-  region: 'Put in key here from .env'
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION
 })
 
 // Middleware to parse JSON
