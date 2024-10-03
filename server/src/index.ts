@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 
 import path from "path";
 import { fileURLToPath } from "url";
-import { uploadImg } from "./controller/uploadImg";
+import { uploadImg, getImgs } from "./controller/index-controller";
 
 dotenv.config();
 const app = express();
@@ -40,11 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 // const indexRouter = require('./routes/index');
-app.get('/images', (req, res) => {
-  console.log('GET /');
-  res.json({ message: 'Hello from server!' });
-});
-
+app.get('/images', getImgs);
 app.post('/upload', uploadImg)
 
 // Error handling middleware

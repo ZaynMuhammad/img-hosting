@@ -10,19 +10,21 @@ async function uploadImg(req: Request, res: Response) {
     }
 
     try {
+
+        // Place this logic in a new func in the services
         // Do I rly need to base64 encode it?
         const base64Data = req.body.img.replace(/^data:image\/\w+;base64,/, '')
         const buffer = Buffer.from(base64Data, 'base64');
 
         // Fix ContentType to accept multiple diff types of files
-        const params = {
-            Bucket: 'name-of-bucket',
-            Key: `images/${Date.now()}.jpg`,
+        const aws_params = {
+            Bucket: process.env.AWS_BUCKET,
+            Key: process.env.AWS_ACCESS_KEY_ID,
             Body: buffer,
             ContentType: `iamge/jpeg`
         }
 
-        await s3Client.send(new PutObjectCommand(params))
+        await s3Client.send(new PutObjectCommand(aws_params))
 
         res.status(200).json({ message: 'Image uploaded successfully' })
     } catch (error) {
