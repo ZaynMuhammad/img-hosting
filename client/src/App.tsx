@@ -1,15 +1,13 @@
 import { useState } from 'react'
 import { 
-  useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
   QueryClientProvider
 } from '@tanstack/react-query';
+import { Routes, Route } from 'react-router-dom';
+
 
 import './App.css'
-import { Test } from './components';
-
+import { Home } from './components';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -19,9 +17,11 @@ function App() {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Test />
-      </QueryClientProvider>
+    	<QueryClientProvider client={queryClient}>
+        	<Routes>
+          	<Route path="/" element={<Home />} />
+        	</Routes>
+      	</QueryClientProvider>
     </>
   )
 }

@@ -6,13 +6,14 @@ import dotenv from 'dotenv'
 
 import path from "path";
 import { fileURLToPath } from "url";
-import { uploadImg, getImgs } from "./controller/index-controller";
+import { getImgs } from "./controller/getImgs";
+import { uploadImg } from "./controller/uploadImg";
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8080;
 
-
+ 
 type Error = {
     status: number;
     message: string;

@@ -1,3 +1,3 @@
-import { Test } from "./Test/Test";
+import { Home } from "./Home/Home";
 
-export { Test };
+export { Home };

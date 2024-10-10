@@ -1,5 +1,4 @@
-import React from 'react';
-import { useQueryClient, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 
 const fetchData = async (): Promise<any> => {
@@ -13,10 +12,8 @@ const fetchData = async (): Promise<any> => {
     return data
 }
 
-function Test() {
+function ImageList() {
     // const API = process.env.API_URL || 'http://localhost:8080/'
- 
-    const queryClient = useQueryClient();
 
     // Fetching data once the component is mounted, will probably need to refactor this to fetch when the component is redered?
     // Revisit
@@ -37,4 +34,4 @@ function Test() {
     );
 }
 
-export { Test };
+export { ImageList };
